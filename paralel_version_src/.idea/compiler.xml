@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="DP_paralelni" />
         <module name="DP" />
         <module name="diplomka" />
-        <module name="DP_paralelni" />
+        <module name="src" />
       </profile>
     </annotationProcessing>
   </component>
@@ -16,6 +17,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="DP" options="-XDignore.symbol.file" />
       <module name="DP_paralelni" options="-XDignore.symbol.file" />
+      <module name="src" options="-XDignore.symbol.file" />
     </option>
   </component>
 </project>

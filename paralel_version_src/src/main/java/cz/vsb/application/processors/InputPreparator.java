@@ -32,6 +32,9 @@ public class InputPreparator {
     public static void prepareInput(String query, char grammar, String queryStmt){
         ParseTree parseTree = null;
         Parser parser = null;
+
+        long start = System.currentTimeMillis();
+
         query = query.toUpperCase();
 
         if(grammar == '0'){
@@ -56,8 +59,15 @@ public class InputPreparator {
         }
 
         if(parseTree != null && parser.getNumberOfSyntaxErrors() == 0){
+            long finish= System.currentTimeMillis();
+            System.out.println("Grammar time: " + (finish-start) + "ms");
+
+            start = System.currentTimeMillis();
             ResultPreparator resultPreparator = new ResultPreparator();
             resultPreparator.prepareData(query, parseTree, parser);
+            finish = System.currentTimeMillis();
+            System.out.println("Converting tree to string xml time: " + (finish-start) + "ms");
+
             prepareInputPaths(resultPreparator.getXmlData(), queryStmt);
         }
     }
@@ -68,11 +78,15 @@ public class InputPreparator {
     }
 
     private static void prepareInputPaths(String xmlTree, String queryStmt){
+        long start = System.currentTimeMillis();
+        long start2 = System.currentTimeMillis();
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         try {
             ArrayList<String> inputPaths = new ArrayList<>();
             DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
             Document document = dBuilder.parse(new InputSource(new StringReader(xmlTree)));
+            long finish2 = System.currentTimeMillis();
+            long convertTime = finish2 - start2;
             XmlTreeView.getLeafPaths((Element)(document.getElementsByTagName(queryStmt).item(0)), new StringBuilder(), inputPaths);
             HashSet<String> inputHashStr = new HashSet<>();
 
@@ -84,7 +98,12 @@ public class InputPreparator {
                 inputHashStr.add(s+ "." + i);
             }
 
+
             getPathsIDs(inputHashStr);
+            long finish = System.currentTimeMillis();
+
+            System.out.println("Converting string to xml: " + convertTime + "ms");
+            System.out.println("Getting paths from input query: " + (finish-start-convertTime) + "ms");
         } catch (ParserConfigurationException e) {
             e.printStackTrace();
         } catch (SAXException e) {

@@ -6,7 +6,7 @@ import java.util.HashSet;
 public class SimilarityCalculator{
 
     private String query;
-    private int id;
+    private int rowId;
     private HashSet<Integer> inputHash;
     private HashSet<Integer> fileHash = new HashSet<>();
 
@@ -19,7 +19,7 @@ public class SimilarityCalculator{
             fileHash.add(Integer.parseInt(splittedPahts[i]));
 
         this.query = splittedLine[1];
-        this.id = Integer.parseInt(splittedLine[0]);
+        this.rowId = Integer.parseInt(splittedLine[0]);
     }
 
     public SelectWithSimilarity calculate() {

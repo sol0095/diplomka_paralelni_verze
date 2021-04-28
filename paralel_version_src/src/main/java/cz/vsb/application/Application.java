@@ -21,6 +21,12 @@ public class Application{
 
         if(Boolean.parseBoolean(PropertyLoader.loadProperty("generatePathsFile")))
             writePathsTofile(queryStmt);
+
+        System.out.println("First calculating:\n");
+        calculateSimilarity(grammar, queryStmt);
+        System.out.println("\n\n Second calculating:\n");
+        calculateSimilarity(grammar, queryStmt);
+        System.out.println("\n\n Third calculating:\n");
         calculateSimilarity(grammar, queryStmt);
     }
 
@@ -63,9 +69,10 @@ public class Application{
         lines.forEach(e ->{
             SelectWithSimilarity selectWithSimilarity = new SimilarityCalculator(e, InputPreparator.getInputPaths()).calculate();
             resultList.add(selectWithSimilarity);
+            selectWithSimilarity = null;
         });
         finish = System.currentTimeMillis();
-        System.out.println("Computing time: " + (finish-start) + "ms");
+        System.out.println("Calculate similarity time: " + (finish-start) + "ms");
 
 
         start = System.currentTimeMillis();
@@ -78,6 +85,7 @@ public class Application{
             System.out.println(resultList.get(i).getQuery());
             System.out.println(resultList.get(i).getSimilarity());
         }
+
     }
 
     private static String getStmtName(char grammar){

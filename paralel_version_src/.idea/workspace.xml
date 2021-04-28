@@ -28,6 +28,8 @@
     <property name="$PROJECT_DIR$/MySqlParser.g4::/gen-listener" value="true" />
     <property name="$PROJECT_DIR$/MySqlParser.g4::/gen-visitor" value="false" />
     <property name="$PROJECT_DIR$/MySqlParser.g4::/output-dir" value="C:\Users\DOMA\Desktop\skola\diplomka\DP\src\main\java\cz\vsb\outputGR" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />

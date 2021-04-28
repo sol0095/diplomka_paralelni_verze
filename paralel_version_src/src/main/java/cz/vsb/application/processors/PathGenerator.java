@@ -65,12 +65,12 @@ public class PathGenerator {
                 Document document = dBuilder.parse(new InputSource(new StringReader(line)));
                 NodeList nodeList = document.getElementsByTagName(queryStmt);
                 String selectCode = document.getElementsByTagName("selectCode").item(0).getFirstChild().getNodeValue();
-                int id = Integer.parseInt(document.getElementsByTagName("rowId").item(0).getFirstChild().getNodeValue());
+                int rowId = Integer.parseInt(document.getElementsByTagName("rowId").item(0).getFirstChild().getNodeValue());
 
                 for(int i = 0; i < nodeList.getLength(); i++){
                     ArrayList<String> pathsInTree = new ArrayList<>();
                     XmlTreeView.getLeafPaths((Element)nodeList.item(i), new StringBuilder(), pathsInTree);
-                    selectsWithPaths.add(new SelectWithPaths(id, selectCode, pathsInTree));
+                    selectsWithPaths.add(new SelectWithPaths(rowId, selectCode, pathsInTree));
                 }
 
                 writeToFile(selectsWithPaths, pathsMap);
